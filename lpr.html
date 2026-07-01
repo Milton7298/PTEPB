@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>屏東縣非法棄置智慧圍籬系統 - 車牌辨識管理</title>
+    <title>桃園市非法棄置智慧圍籬系統 - 車牌辨識管理</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -17,8 +17,6 @@
         .nav-tabs .nav-link.active { color: #0d6efd; border-top: 3px solid #0d6efd; }
         .badge-recog-success { background-color: #198754; }
         .badge-recog-fail { background-color: #dc3545; }
-        
-        /* 排序欄位標題樣式 */
         .sortable { cursor: pointer; user-select: none; transition: background-color 0.2s; white-space: nowrap; }
         .sortable:hover { background-color: #e2e6ea; }
         .sort-icon { margin-left: 5px; font-size: 0.85em; }
@@ -30,11 +28,8 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <h2 class="m-0"><i class="fas fa-car-side me-2"></i>屏東縣非法棄置智慧圍籬系統</h2>
+                <h2 class="m-0"><i class="fas fa-car-side me-2"></i>桃園市非法棄置智慧圍籬系統</h2>
                 <p class="m-0 text-white-50">車牌辨識紀錄查詢與人工校正作業</p>
-            </div>
-            <div class="text-end">
-                <span class="badge bg-warning text-dark"><i class="fas fa-image me-1"></i>KER-5379 實測影像整合版</span>
             </div>
         </div>
     </div>
@@ -68,12 +63,14 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label fw-bold">點位/設備</label>
+                        <label class="form-label fw-bold">地點名稱</label>
                         <select class="form-select" id="qLocation">
                             <option value="">所有地點</option>
-                            <option value="新屋區">台61北向入口(新屋區)</option>
-                            <option value="觀音區">台61南向入口(觀音區)</option>
-                            <option value="大園區">台61北向入口(大園區)</option>
+                            <option value="國道3號屏東交流道">國道3號屏東交流道南下出口端(長治鄉)</option>
+                            <option value="國道10號里港交流道">國道10號里港交流道(里港鄉)</option>
+                            <option value="建國路與大溪路口">建國路與大溪路口(屏東市)</option>
+                            <option value="沿山公路(高樹段)">沿山公路(高樹段)(高樹鄉)</option>
+                            <option value="沿山公路(獅頭庄水農場)">沿山公路(獅頭庄水農場)(新埤鄉)</option>
                         </select>
                     </div>
                     <div class="col-md-2">
@@ -131,12 +128,14 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label fw-bold">點位/設備</label>
+                        <label class="form-label fw-bold">地點名稱</label>
                         <select class="form-select" id="aLocation">
                             <option value="">所有地點</option>
-                            <option value="新屋區">台61北向入口(新屋區)</option>
-                            <option value="觀音區">台61南向入口(觀音區)</option>
-                            <option value="大園區">台61北向入口(大園區)</option>
+                            <option value="國道3號屏東交流道">國道3號屏東交流道南下出口端(長治鄉)</option>
+                            <option value="國道10號里港交流道">國道10號里港交流道(里港鄉)</option>
+                            <option value="建國路與大溪路口">建國路與大溪路口(屏東市)</option>
+                            <option value="沿山公路(高樹段)">沿山公路(高樹段)(高樹鄉)</option>
+                            <option value="沿山公路(獅頭庄水農場)">沿山公路(獅頭庄水農場)(新埤鄉)</option>
                         </select>
                     </div>
                     <div class="col-md-2">
@@ -201,160 +200,64 @@
     }
 
     let lprData = [
-        { id: 101, time: "2026-06-06 10:05:00", loc: "台61北向入口(新屋區)", siteId: "LOCA_68000_2026_0001", camId: "LOCA_68000_2026_0001_Front_01", plate: "KER-5379", active: true, status: 1, frontImg: "前截圖.jpg", bedImg: "車身照片.jpg", rearImg: "後截圖.jpg" },
-        { id: 102, time: "2026-06-05 09:15:10", loc: "台61南向入口(觀音區)", siteId: "LOCA_68000_2026_0002", camId: "LOCA_68000_2026_0002_Front_01", plate: "XYZ-5678", active: true, status: 1, frontImg: createMockImage("XYZ-5678", "車頭影像", "#333"), bedImg: createMockImage("XYZ-5678", "車斗影像", "#333"), rearImg: createMockImage("XYZ-5678", "車尾影像", "#333") },
-        { id: 103, time: "2026-06-04 10:20:00", loc: "台61北向入口(大園區)", siteId: "LOCA_68000_2026_0003", camId: "LOCA_68000_2026_0003_Front_01", plate: "無法辨識", active: true, status: 0, frontImg: createMockImage("無法辨識", "車頭過曝", "#dc3545"), bedImg: createMockImage("UNKNOWN", "車斗無特徵", "#dc3545"), rearImg: createMockImage("無法辨識", "無車尾牌", "#dc3545") },
-        { id: 104, time: "2026-06-06 11:30:00", loc: "台61南向入口(觀音區)", siteId: "LOCA_68000_2026_0002", camId: "LOCA_68000_2026_0002_Front_01", plate: "ABC-1234", active: true, status: 1, frontImg: createMockImage("ABC-1234", "車頭影像", "#333"), bedImg: createMockImage("ABC-1234", "車斗影像", "#333"), rearImg: createMockImage("ABC-1234", "車尾影像", "#333") },
-        { id: 105, time: "2026-06-05 14:20:00", loc: "台61北向入口(新屋區)", siteId: "LOCA_68000_2026_0001", camId: "LOCA_68000_2026_0001_Front_01", plate: "無法辨識", active: true, status: 0, frontImg: createMockImage("無法辨識", "模糊", "#dc3545"), bedImg: createMockImage("UNKNOWN", "無特徵", "#dc3545"), rearImg: createMockImage("無法辨識", "反光", "#dc3545") }
+        { id: 101, time: "2026-06-06 10:05:00", loc: "國道3號屏東交流道南下出口端(長治鄉)", siteId: "LOCA_68000_2026_0001", camId: "LOCA_68000_2026_0001_Front_01", plate: "KER-5379", active: true, status: 1, frontImg: "前截圖.jpg", bedImg: "車身照片.jpg", rearImg: "後截圖.jpg" },
+        { id: 102, time: "2026-06-05 09:15:10", loc: "國道10號里港交流道(里港鄉)", siteId: "LOCA_68000_2026_0002", camId: "LOCA_68000_2026_0002_Front_01", plate: "XYZ-5678", active: true, status: 1, frontImg: createMockImage("XYZ-5678", "車頭影像", "#333"), bedImg: createMockImage("XYZ-5678", "車斗影像", "#333"), rearImg: createMockImage("XYZ-5678", "車尾影像", "#333") },
+        { id: 103, time: "2026-06-04 10:20:00", loc: "建國路與大溪路口(屏東市)", siteId: "LOCA_68000_2026_0003", camId: "LOCA_68000_2026_0003_Front_01", plate: "無法辨識", active: true, status: 0, frontImg: createMockImage("無法辨識", "車頭過曝", "#dc3545"), bedImg: createMockImage("UNKNOWN", "車斗無特徵", "#dc3545"), rearImg: createMockImage("無法辨識", "無車尾牌", "#dc3545") }
     ];
 
-    // 排序狀態物件
-    let sortConfig = {
-        query: { key: 'time', order: 'desc' },
-        adjust: { key: 'time', order: 'desc' }
-    };
+    let sortConfig = { query: { key: 'time', order: 'desc' }, adjust: { key: 'time', order: 'desc' } };
 
     document.addEventListener('DOMContentLoaded', () => {
         const today = new Date().toISOString().split('T')[0];
-        document.getElementById('qDateStart').value = today; 
-        document.getElementById('qDateEnd').value = today; 
-        document.getElementById('aDateStart').value = today;
-        document.getElementById('aDateEnd').value = today;
-        
-        updateSortIcons('query');
-        updateSortIcons('adjust');
-        renderQueryTable(); 
-        renderAdjustTable(); 
-        updateCount();
+        document.getElementById('qDateStart').value = today; document.getElementById('qDateEnd').value = today; 
+        document.getElementById('aDateStart').value = today; document.getElementById('aDateEnd').value = today;
+        renderQueryTable(); renderAdjustTable(); updateCount();
     });
 
     function updateCount() { document.getElementById('unrecognizedCount').innerText = lprData.filter(d => d.status === 0).length; }
 
-    // 處理排序邏輯
     window.handleSort = function(tab, key) {
-        if (sortConfig[tab].key === key) {
-            sortConfig[tab].order = sortConfig[tab].order === 'asc' ? 'desc' : 'asc';
-        } else {
-            sortConfig[tab].key = key;
-            sortConfig[tab].order = 'desc';
-        }
+        if (sortConfig[tab].key === key) sortConfig[tab].order = sortConfig[tab].order === 'asc' ? 'desc' : 'asc';
+        else { sortConfig[tab].key = key; sortConfig[tab].order = 'desc'; }
         updateSortIcons(tab);
-        if (tab === 'query') renderQueryTable();
-        else renderAdjustTable();
+        tab === 'query' ? renderQueryTable() : renderAdjustTable();
     }
 
-    // 更新排序圖示
     function updateSortIcons(tab) {
-        document.querySelectorAll(`#${tab}-content .sort-icon`).forEach(icon => {
-            icon.className = 'fas fa-sort sort-icon text-muted';
-        });
+        document.querySelectorAll(`#${tab}-content .sort-icon`).forEach(icon => icon.className = 'fas fa-sort sort-icon text-muted');
         const activeIcon = document.getElementById(`sort-${tab}-${sortConfig[tab].key}`);
-        if (activeIcon) {
-            activeIcon.className = sortConfig[tab].order === 'asc' ? 'fas fa-sort-up sort-icon text-primary' : 'fas fa-sort-down sort-icon text-primary';
-        }
+        if (activeIcon) activeIcon.className = sortConfig[tab].order === 'asc' ? 'fas fa-sort-up sort-icon text-primary' : 'fas fa-sort-down sort-icon text-primary';
     }
 
-    // 資料排序共用函式
     function sortDataArray(data, tab) {
-        const key = sortConfig[tab].key;
-        const order = sortConfig[tab].order;
+        const key = sortConfig[tab].key, order = sortConfig[tab].order;
         return data.sort((a, b) => {
-            let valA = String(a[key] || '');
-            let valB = String(b[key] || '');
-            if (valA < valB) return order === 'asc' ? -1 : 1;
-            if (valA > valB) return order === 'asc' ? 1 : -1;
-            return 0;
+            let valA = String(a[key] || ''), valB = String(b[key] || '');
+            return order === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
         });
     }
 
     function renderQueryTable() {
         const tbody = document.getElementById('queryTableBody'); tbody.innerHTML = '';
-        
-        const locFilter = document.getElementById('qLocation').value;
-        const statusFilter = document.getElementById('qStatus').value;
-        const plateFilter = document.getElementById('qPlate').value.trim().toLowerCase();
-
-        let filtered = lprData.filter(item => {
-            const matchLoc = locFilter ? item.loc.includes(locFilter) : true;
-            const matchStatus = statusFilter ? (statusFilter === '1' ? item.active : !item.active) : true; 
-            const matchPlate = plateFilter ? item.plate.toLowerCase().includes(plateFilter) : true;
-            return matchLoc && matchStatus && matchPlate;
-        });
-
-        // 執行排序
+        const loc = document.getElementById('qLocation').value, status = document.getElementById('qStatus').value, plate = document.getElementById('qPlate').value.trim().toLowerCase();
+        let filtered = lprData.filter(item => (!loc || item.loc.includes(loc)) && (!status || (status === '1' ? item.status === 1 : item.status === 0)) && (!plate || item.plate.toLowerCase().includes(plate)));
         filtered = sortDataArray(filtered, 'query');
 
-        if(filtered.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" class="text-center py-4 text-muted">查無符合條件的紀錄</td></tr>`;
-            return;
-        }
-
         filtered.forEach(item => {
-            let plateBadge = item.plate === "無法辨識" ? `<span class="badge badge-recog-fail">無法辨識</span>` : `<span class="badge badge-recog-success">${item.plate}</span>`;
-            const imgError = `onerror="this.parentNode.innerHTML='<span class=\\'text-danger small\\'>找不到圖檔</span>'"`;
-            
-            const timeParts = item.time.split(' ');
-            const displayTime = `${timeParts[0]}<br>${timeParts[1]}`;
-
-            tbody.innerHTML += `
-                <tr>
-                    <td class="font-monospace small">${displayTime}</td>
-                    <td class="text-start small">${item.loc}</td>
-                    <td class="font-monospace small">${item.siteId}</td>
-                    <td class="font-monospace small text-muted">${item.camId}</td>
-                    <td class="font-monospace fs-6">${plateBadge}</td>
-                    <td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.frontImg}', '${item.plate} - 車頭')"><img src="${item.frontImg}" ${imgError}></div></td>
-                    <td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.bedImg}', '${item.plate} - 車斗')"><img src="${item.bedImg}" ${imgError}></div></td>
-                    <td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.rearImg}', '${item.plate} - 車尾')"><img src="${item.rearImg}" ${imgError}></div></td>
-                    <td>${item.active ? '<span class="text-success small">啟用</span>' : '<span class="text-secondary small">停用</span>'}</td>
-                    <td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button></td>
-                </tr>
-            `;
+            const timeParts = item.time.split(' '), displayTime = `${timeParts[0]}<br>${timeParts[1]}`;
+            tbody.innerHTML += `<tr><td class="font-monospace small">${displayTime}</td><td class="text-start small">${item.loc}</td><td class="font-monospace small">${item.siteId}</td><td class="font-monospace small text-muted">${item.camId}</td><td class="font-monospace fs-6">${item.plate === "無法辨識" ? '<span class="badge badge-recog-fail">無法辨識</span>' : `<span class="badge badge-recog-success">${item.plate}</span>`}</td><td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.frontImg}', '${item.plate} - 車頭')"><img src="${item.frontImg}"></div></td><td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.bedImg}', '${item.plate} - 車斗')"><img src="${item.bedImg}"></div></td><td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.rearImg}', '${item.plate} - 車尾')"><img src="${item.rearImg}"></div></td><td>${item.active ? '<span class="text-success small">啟用</span>' : '<span class="text-secondary small">停用</span>'}</td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button></td></tr>`;
         });
     }
 
     function renderAdjustTable() {
         const tbody = document.getElementById('adjustTableBody'); tbody.innerHTML = '';
-        
-        const locFilter = document.getElementById('aLocation').value;
-        const statusFilter = document.getElementById('aStatus').value;
-        const plateFilter = document.getElementById('aPlate').value.trim().toLowerCase();
-
-        let filtered = lprData.filter(item => {
-            const isUnrecognized = item.status === 0;
-            const matchLoc = locFilter ? item.loc.includes(locFilter) : true;
-            const matchStatus = statusFilter ? (statusFilter === '1' ? item.active : !item.active) : true; 
-            const matchPlate = plateFilter ? item.plate.toLowerCase().includes(plateFilter) : true;
-            return isUnrecognized && matchLoc && matchStatus && matchPlate;
-        });
-
-        // 執行排序
+        const loc = document.getElementById('aLocation').value, status = document.getElementById('aStatus').value, plate = document.getElementById('aPlate').value.trim().toLowerCase();
+        let filtered = lprData.filter(item => item.status === 0 && (!loc || item.loc.includes(loc)) && (!status || (status === '1' ? item.status === 1 : item.status === 0)) && (!plate || item.plate.toLowerCase().includes(plate)));
         filtered = sortDataArray(filtered, 'adjust');
 
-        if (filtered.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="9" class="text-center py-5 text-muted">無待處理案件</td></tr>';
-            return;
-        }
-        
         filtered.forEach(item => {
-            const imgError = `onerror="this.parentNode.innerHTML='<span class=\\'text-danger small\\'>圖檔遺失</span>'"`;
-            
-            const timeParts = item.time.split(' ');
-            const displayTime = `${timeParts[0]}<br>${timeParts[1]}`;
-
-            tbody.innerHTML += `
-                <tr>
-                    <td class="small font-monospace">${displayTime}</td>
-                    <td class="text-start small">${item.loc}</td>
-                    <td class="font-monospace small">${item.siteId}</td>
-                    <td class="font-monospace small text-muted">${item.camId}</td>
-                    <td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.frontImg}', '待校正 - 車頭')"><img src="${item.frontImg}" ${imgError}></div></td>
-                    <td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.bedImg}', '待校正 - 車斗')"><img src="${item.bedImg}" ${imgError}></div></td>
-                    <td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.rearImg}', '待校正 - 車尾')"><img src="${item.rearImg}" ${imgError}></div></td>
-                    <td><input type="text" class="form-control font-monospace fw-bold mx-auto" id="input-${item.id}" placeholder="輸入正確車號" style="text-transform: uppercase; max-width: 150px;"></td>
-                    <td><button class="btn btn-success w-100" onclick="submitCorrection(${item.id})">送出</button></td>
-                </tr>
-            `;
+            const timeParts = item.time.split(' '), displayTime = `${timeParts[0]}<br>${timeParts[1]}`;
+            tbody.innerHTML += `<tr><td class="small font-monospace">${displayTime}</td><td class="text-start small">${item.loc}</td><td class="font-monospace small">${item.siteId}</td><td class="font-monospace small text-muted">${item.camId}</td><td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.frontImg}', '待校正 - 車頭')"><img src="${item.frontImg}"></div></td><td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.bedImg}', '待校正 - 車斗')"><img src="${item.bedImg}"></div></td><td><div class="img-thumbnail-custom mx-auto" onclick="openImgModal('${item.rearImg}', '待校正 - 車尾')"><img src="${item.rearImg}"></div></td><td><input type="text" class="form-control font-monospace fw-bold mx-auto" id="input-${item.id}" placeholder="輸入正確車號" style="text-transform: uppercase; max-width: 150px;"></td><td><button class="btn btn-success w-100" onclick="submitCorrection(${item.id})">送出</button></td></tr>`;
         });
     }
 
