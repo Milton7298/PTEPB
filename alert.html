@@ -260,8 +260,8 @@
                     <div class="mb-3">
                         <label class="form-label fw-bold">Email 信箱列表</label>
                         <textarea class="form-control" id="inputEmail" rows="3" placeholder="例如：
-captain@tycg.gov.tw,
-member01@tycg.gov.tw"></textarea>
+captain@PTEPB.GOV.TW,
+member01@PTEPB.GOV.TW"></textarea>
                         <div class="form-text">若是群組，請輸入多個 Email，並以<strong>逗號 (,)</strong> 分隔。</div>
                     </div>
                     
@@ -295,9 +295,9 @@ member01@tycg.gov.tw"></textarea>
 <script>
     // --- PART 1: 通報對象邏輯 ---
     let recipients = [
-        { id: 1, name: "稽查大隊-第一中隊", email: "captain@tycg.gov.tw, member01@tycg.gov.tw, member02@tycg.gov.tw", type: "group", subBlacklist: true, subOffline: false },
+        { id: 1, name: "稽查大隊-第一中隊", email: "captain@PTEPB.GOV.TW, member01@PTEPB.GOV.TW, member02@PTEPB.GOV.TW", type: "group", subBlacklist: true, subOffline: false },
         { id: 2, name: "系統維運人員", email: "admin@tech-support.com", type: "user", subBlacklist: false, subOffline: true },
-        { id: 3, name: "王大明 (科長)", email: "dm.wang@tycg.gov.tw", type: "user", subBlacklist: true, subOffline: true },
+        { id: 3, name: "王大明 (科長)", email: "dm.wang@PTEPB.GOV.TW", type: "user", subBlacklist: true, subOffline: true },
     ];
 
     function renderRecipients() {
