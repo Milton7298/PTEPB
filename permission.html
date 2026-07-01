@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>屏東縣環保局非法棄置智慧圍籬系統 - 權限管理</title>
+    <title>屏東縣非法棄置智慧圍籬系統 - 權限管理</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -35,7 +35,7 @@
 
 <div class="header-section">
     <div class="container">
-        <h2 class="m-0"><i class="fas fa-user-shield me-2"></i>屏東縣環保局非法棄置智慧圍籬系統</h2>
+        <h2 class="m-0"><i class="fas fa-user-shield me-2"></i>屏東縣非法棄置智慧圍籬系統</h2>
         <p class="m-0 text-white-50">使用者帳號與角色權限配置中心</p>
     </div>
 </div>
@@ -196,7 +196,7 @@
                                 <td><input type="checkbox" class="form-check-input" checked></td>
                             </tr>
                             <tr class="table-warning">
-                                <td>日誌/稽核查詢</td>
+                                <td >日誌/稽核查詢</td>
                                 <td><input type="checkbox" class="form-check-input" disabled></td>
                                 <td><input type="checkbox" class="form-check-input" disabled></td>
                                 <td><input type="checkbox" class="form-check-input" checked></td>
@@ -230,7 +230,7 @@
                 <form id="userForm">
                     <div class="mb-3">
                         <label class="form-label fw-bold">帳號 (Email) <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="name@tycg.gov.tw" required>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="name@PTEPB.GOV.TW" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold">使用者姓名 <span class="text-danger">*</span></label>
@@ -258,7 +258,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold">密碼設定</label>
-                        <input type="password" class="form-control" id="inputPwd" placeholder="預設密碼：Taoyuan1234" disabled>
+                        <input type="password" class="form-control" id="inputPwd" placeholder="預設密碼：PTEPB1234" disabled>
                         <div class="form-text text-muted">新增時使用預設密碼，使用者登入後需強制修改。</div>
                     </div>
                     <div class="form-check form-switch">
@@ -280,9 +280,9 @@
     // 1. 模擬使用者資料
     let users = [
         { name: "系統管理員", email: "admin@system.local", unit: "資訊科", role: "admin", status: true, lastLogin: "2023-11-27 08:01" },
-        { name: "王大明 (科長)", email: "dm.wang@tycg.gov.tw", unit: "廢棄物管理科", role: "manager", status: true, lastLogin: "2023-11-27 09:30" },
-        { name: "李小華 (稽查)", email: "sh.lee@tycg.gov.tw", unit: "稽查大隊", role: "user", status: true, lastLogin: "2023-11-27 10:15" },
-        { name: "陳測試", email: "test.chen@tycg.gov.tw", unit: "稽查大隊", role: "user", status: false, lastLogin: "2023-10-01 14:00" },
+        { name: "王大明 (科長)", email: "dm.wang@PTEPB.GOV.TW", unit: "廢棄物管理科", role: "manager", status: true, lastLogin: "2023-11-27 09:30" },
+        { name: "李小華 (稽查)", email: "sh.lee@PTEPB.GOV.TW", unit: "稽查大隊", role: "user", status: true, lastLogin: "2023-11-27 10:15" },
+        { name: "陳測試", email: "test.chen@PTEPB.GOV.TW", unit: "稽查大隊", role: "user", status: false, lastLogin: "2023-10-01 14:00" },
         { name: "廠商維運", email: "support@vendor.com", unit: "委外廠商", role: "admin", status: true, lastLogin: "2023-11-26 23:00" },
     ];
 
@@ -296,14 +296,12 @@
         tbody.innerHTML = '';
 
         users.forEach((user, index) => {
-            // 角色 Badge
             let roleBadge = '';
             let roleName = '';
             if(user.role === 'admin') { roleBadge = 'badge-role-admin'; roleName = '系統管理員'; }
             else if(user.role === 'manager') { roleBadge = 'badge-role-manager'; roleName = '單位主管'; }
             else { roleBadge = 'badge-role-user'; roleName = '一般經辦'; }
 
-            // 狀態 Switch (模擬)
             const statusSwitch = user.status ? 'checked' : '';
             const statusText = user.status ? '<span class="text-success">啟用</span>' : '<span class="text-muted">停用</span>';
 
@@ -330,7 +328,6 @@
         });
     }
 
-    // 3. 模態框邏輯
     const userModal = new bootstrap.Modal(document.getElementById('userModal'));
 
     function openUserModal() {
@@ -361,10 +358,9 @@
         alert("使用者新增成功！");
     }
 
-    // 4. 其他操作
     function toggleUserStatus(index) {
         users[index].status = !users[index].status;
-        renderUserTable(); // 重新渲染以更新文字
+        renderUserTable();
     }
 
     function resetPwd(name) {
