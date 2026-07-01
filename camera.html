@@ -17,7 +17,6 @@
         .list-group-item:hover { background-color: #f8f9fa; }
         .list-group-item.active { background-color: #e9ecef; color: #2c3e50; border-color: #dee2e6; border-left-color: #0d6efd; font-weight: bold; }
         .content-area { flex-grow: 1; padding: 20px; overflow-y: auto; background-color: #f8f9fa; }
-        .tree-container { position: relative; padding-left: 20px; }
         .tree-root { display: flex; align-items: center; margin-bottom: 20px; }
         .tree-branch { position: relative; margin-left: 40px; padding-left: 30px; border-left: 2px solid #adb5bd; }
         .tree-leaf { position: relative; margin-bottom: 15px; display: flex; align-items: center; }
@@ -155,70 +154,13 @@
     </div>
 </div>
 
-<!-- Modal 編輯視窗 -->
-<div class="modal fade" id="dataModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-light">
-                <h5 class="modal-title" id="modalTitle">監控點位與攝影機維護</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="monitorForm">
-                    <input type="hidden" id="editIndex">
-                    <h6 class="text-primary border-bottom pb-2 mb-3">監控點位設定</h6>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">點位編號 (SiteID)</label>
-                            <input type="text" class="form-control font-monospace" id="inputID" required placeholder="LOCA_68000_2026_0001">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">地點名稱</label>
-                            <input type="text" class="form-control" id="inputName" required>
-                        </div>
-                    </div>
-
-                    <h6 class="text-primary border-bottom pb-2 mb-3 mt-4">攝影機配置 (請依命名規則)</h6>
-                    <div class="bg-light p-2 mb-2 rounded border">
-                        <div class="row align-items-center">
-                            <div class="col-2 fw-bold">車頭</div>
-                            <div class="col-5"><input type="text" class="form-control form-control-sm font-monospace" id="inputCam1ID"></div>
-                            <div class="col-2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="inputCam1Conn" checked><label class="small">連線</label></div></div>
-                            <div class="col-3"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="inputCam1Active" checked><label class="small">啟用</label></div></div>
-                        </div>
-                    </div>
-                    <div class="bg-light p-2 mb-2 rounded border">
-                        <div class="row align-items-center">
-                            <div class="col-2 fw-bold">車斗</div>
-                            <div class="col-5"><input type="text" class="form-control form-control-sm font-monospace" id="inputCam2ID"></div>
-                            <div class="col-2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="inputCam2Conn" checked><label class="small">連線</label></div></div>
-                            <div class="col-3"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="inputCam2Active" checked><label class="small">啟用</label></div></div>
-                        </div>
-                    </div>
-                    <div class="bg-light p-2 mb-2 rounded border">
-                        <div class="row align-items-center">
-                            <div class="col-2 fw-bold">車尾</div>
-                            <div class="col-5"><input type="text" class="form-control form-control-sm font-monospace" id="inputCam3ID"></div>
-                            <div class="col-2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="inputCam3Conn" checked><label class="small">連線</label></div></div>
-                            <div class="col-3"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="inputCam3Active" checked><label class="small">啟用</label></div></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="dataModal.hide()">儲存變更</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     let monitorData = [
         {
             id: "LOCA_68000_2026_0001",
-            name: "台61北向入口(新屋區)",
-            lat: 24.9723, lng: 121.0145, alarm: 30, active: true,
+            name: "國道10號里港交流道(里港鄉)",
+            lat: 22.7834, lng: 120.4932, alarm: 30, active: true,
             cameras: [
                 { id: "LOCA_68000_2026_0001_Front_01", online: true, active: true },
                 { id: "LOCA_68000_2026_0001_Bed_01", online: true, active: true },
@@ -227,8 +169,8 @@
         },
         {
             id: "LOCA_68000_2026_0002",
-            name: "台61南向入口(觀音區)",
-            lat: 25.0334, lng: 121.0789, alarm: 20, active: true,
+            name: "建國路與大溪路口(屏東市)",
+            lat: 22.6789, lng: 120.4856, alarm: 20, active: true,
             cameras: [
                 { id: "LOCA_68000_2026_0002_Front_01", online: true, active: true },
                 { id: "LOCA_68000_2026_0002_Bed_01", online: true, active: true },
@@ -237,8 +179,8 @@
         },
         {
             id: "LOCA_68000_2026_0003",
-            name: "台61北向入口(大園區)",
-            lat: 25.0645, lng: 121.1973, alarm: 60, active: false,
+            name: "沿山公路(高樹段)(高樹鄉)",
+            lat: 22.8543, lng: 120.6124, alarm: 60, active: false,
             cameras: [
                 { id: "LOCA_68000_2026_0003_Front_01", online: false, active: false },
                 { id: "LOCA_68000_2026_0003_Bed_01", online: false, active: false },
@@ -250,7 +192,6 @@
     let currentIndex = -1;
     let filteredIndices = [];
     
-    // 初始化時，不僅產生選單，同時自動選取第一筆資料載入畫面
     document.addEventListener('DOMContentLoaded', () => { 
         handleSearch(); 
         if (filteredIndices.length > 0) {
@@ -312,15 +253,6 @@
             return -1;
         }).filter(idx => idx !== -1);
         renderSidebar(filteredIndices);
-    }
-    
-    const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
-    window.openEditModal = function() {
-        const item = monitorData[currentIndex];
-        document.getElementById('inputID').value = item.id;
-        document.getElementById('inputName').value = item.name;
-        for (let i = 0; i < 3; i++) document.getElementById(`inputCam${i+1}ID`).value = item.cameras[i].id;
-        dataModal.show();
     }
 </script>
 </body>
