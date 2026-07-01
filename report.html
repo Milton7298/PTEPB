@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* --- 核心風格 (一致性維持) --- */
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; }
         .header-section { background-color: #2c3e50; color: white; padding: 20px 0; margin-bottom: 20px; }
         .card { box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: none; margin-bottom: 20px; }
@@ -44,16 +43,18 @@
             <div class="card p-4">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-3"><label class="form-label fw-bold">統計月份</label><input type="month" class="form-control" id="recogMonth"></div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="form-label fw-bold">地點名稱</label>
                         <select class="form-select" id="recogLoc">
                             <option value="">所有地點</option>
-                            <option value="新屋區">台61北向入口(新屋區)</option>
-                            <option value="觀音區">台61南向入口(觀音區)</option>
-                            <option value="大園區">台61北向入口(大園區)</option>
+                            <option value="國道10號里港交流道">國道10號里港交流道(里港鄉)</option>
+                            <option value="建國路與大溪路口">建國路與大溪路口(屏東市)</option>
+                            <option value="沿山公路(高樹段)">沿山公路(高樹段)(高樹鄉)</option>
+                            <option value="國道3號屏東交流道">國道3號屏東交流道南下出口端(長治鄉)</option>
+                            <option value="沿山公路(獅頭庄水農場)">沿山公路(獅頭庄水農場)(新埤鄉)</option>
                         </select>
                     </div>
-                    <div class="col-md-3"><label class="form-label fw-bold">辨識結果篩選</label><select class="form-select" id="recogStatus"><option value="all">全部 (成功+失敗)</option><option value="success">僅顯示成功</option><option value="fail">僅顯示失敗</option></select></div>
+                    <div class="col-md-2"><label class="form-label fw-bold">辨識結果篩選</label><select class="form-select" id="recogStatus"><option value="all">全部 (成功+失敗)</option><option value="success">僅顯示成功</option><option value="fail">僅顯示失敗</option></select></div>
                     <div class="col-md-3 text-end"><button class="btn btn-primary" onclick="renderRecogTable()"><i class="fas fa-search me-1"></i> 查詢</button></div>
                 </div>
             </div>
@@ -150,7 +151,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         const yyyyMm = today.toISOString().slice(0, 7);
-        const yyyyMmDd = today.toISOString().slice(0, 10);
         document.getElementById('recogMonth').value = yyyyMm; 
         document.getElementById('rankMonth').value = yyyyMm;
         document.getElementById('uploadStart').value = "2026-06-03"; 
@@ -161,14 +161,13 @@
         renderRankTable();
     });
 
-    // 渲染辨識統計表 (更新為 2026-06-03 後續四天)
     function renderRecogTable() {
         const tbody = document.getElementById('recogTableBody'); tbody.innerHTML = '';
         const mockData = [
-            { date: "2026-06-06", loc: "台61北向入口(大園區)", total: 150, success: 145, fail: 5 },
-            { date: "2026-06-05", loc: "台61南向入口(觀音區)", total: 120, success: 110, fail: 10 },
-            { date: "2026-06-04", loc: "台61北向入口(新屋區)", total: 140, success: 138, fail: 2 },
-            { date: "2026-06-03", loc: "台61北向入口(大園區)", total: 90, success: 80, fail: 10 },
+            { date: "2026-06-06", loc: "國道10號里港交流道(里港鄉)", total: 150, success: 145, fail: 5 },
+            { date: "2026-06-05", loc: "建國路與大溪路口(屏東市)", total: 120, success: 110, fail: 10 },
+            { date: "2026-06-04", loc: "沿山公路(高樹段)(高樹鄉)", total: 140, success: 138, fail: 2 },
+            { date: "2026-06-03", loc: "國道3號屏東交流道南下出口端(長治鄉)", total: 90, success: 80, fail: 10 },
         ];
         mockData.forEach(item => {
             const rate = Math.round((item.success / item.total) * 100);
@@ -177,7 +176,6 @@
         });
     }
 
-    // 渲染上傳統計表 (更新為 2026-06-03 後續四天)
     function renderUploadTable() {
         const tbody = document.getElementById('uploadTableBody'); tbody.innerHTML = '';
         const mockUploadStats = [
@@ -197,13 +195,12 @@
         });
     }
 
-    // 渲染排行榜 (更新點位名稱)
     function renderRankTable() {
         const tbody = document.getElementById('rankTableBody'); tbody.innerHTML = '';
         const mockRank = [
-            { plate: "KER-5379", type: "大貨車", count: 12, lastLoc: "台61北向入口(新屋區)" },
-            { plate: "XYZ-8888", type: "小貨車", count: 9, lastLoc: "台61南向入口(觀音區)" },
-            { plate: "ABC-1234", type: "聯結車", count: 7, lastLoc: "台61北向入口(大園區)" }
+            { plate: "KER-5379", type: "大貨車", count: 12, lastLoc: "國道10號里港交流道(里港鄉)" },
+            { plate: "XYZ-8888", type: "小貨車", count: 9, lastLoc: "建國路與大溪路口(屏東市)" },
+            { plate: "ABC-1234", type: "聯結車", count: 7, lastLoc: "沿山公路(高樹段)(高樹鄉)" }
         ];
         mockRank.forEach((item, index) => {
             const rank = index + 1;
@@ -213,7 +210,6 @@
         });
     }
 
-    // 開啟明細 Modal
     function openDetailModal(date, status) {
         const modalBody = document.getElementById('detailModalBody');
         modalBody.innerHTML = '';
