@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>屏東縣非法棄置智慧圍籬系統</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/leaflet.css" />
     <style>
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; padding: 20px; }
-        /* 強制設定容器高度與顯示 */
-        #gisMap { width: 100% !important; height: 400px !important; display: block !important; position: relative !important; z-index: 1; }
-        /* 避免 Bootstrap 影響 Leaflet 圖磚 */
-        .leaflet-tile { max-width: none !important; }
+        .card-counter { box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: none; border-radius: 10px; }
+        .icon-box { font-size: 2.5rem; opacity: 0.3; }
+        /* 強制 GIS 容器顯示 */
+        #gisMap { width: 100%; height: 400px; display: block; background-color: #e9ecef; }
     </style>
 </head>
 <body>
@@ -28,7 +28,7 @@
     <div class="row g-4">
         <div class="col-md-8">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white fw-bold py-3"><i class="fas fa-map-marked-alt me-2 text-primary"></i>即時違規熱點地圖 (GIS)</div>
+                <div class="card-header bg-white fw-bold py-3"><i class="fas fa-map-marked-alt me-2 text-primary"></i>即時違規熱點地圖 (屏東)</div>
                 <div class="card-body p-0"><div id="gisMap"></div></div>
             </div>
         </div>
@@ -53,39 +53,30 @@
         </div>
     </div>
 
-   <script src="https://unpkg.com/leaflet@1.9.4/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/leaflet.js"></script>
     <script>
-        // 使用 window.onload 確保 HTML 結構、CSS 樣式與 iframe 大小都穩定後才執行
         window.addEventListener('load', () => {
-            // 初始化地圖容器
-            const map = L.map('gisMap').setView([22.75, 120.55], 11);
-
-            // 載入 OpenStreetMap 圖資
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
-                attribution: '© OpenStreetMap' 
+            // 屏東縣座標中心 [22.6, 120.5]
+            const map = L.map('gisMap').setView([22.6, 120.5], 10);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap'
             }).addTo(map);
 
             const points = [
-                { name: "國道10號里港交流道(里港鄉)", coords: [22.7834, 120.4932], id: "LOCA_68000_2026_0001" },
-                { name: "建國路與大溪路口(屏東市)", coords: [22.6789, 120.4856], id: "LOCA_68000_2026_0002" },
-                { name: "沿山公路(高樹段)(高樹鄉)", coords: [22.8543, 120.6124], id: "LOCA_68000_2026_0003" },
-                { name: "國道3號屏東交流道南下出口端(長治鄉)", coords: [22.6950, 120.5400], id: "LOCA_68000_2026_0004" },
-                { name: "沿山公路(獅頭庄水農場)(新埤鄉)", coords: [22.5600, 120.5800], id: "LOCA_68000_2026_0005" }
+                { name: "國道10號里港交流道", coords: [22.7834, 120.4932] },
+                { name: "建國路與大溪路口", coords: [22.6789, 120.4856] },
+                { name: "沿山公路(高樹段)", coords: [22.8543, 120.6124] },
+                { name: "國道3號屏東交流道", coords: [22.6950, 120.5400] },
+                { name: "沿山公路(獅頭庄水農場)", coords: [22.5600, 120.5800] }
             ];
 
             points.forEach(p => {
-                L.marker(p.coords).addTo(map).bindPopup(`<b>${p.name}</b><br>ID: ${p.id}`);
+                L.marker(p.coords).addTo(map).bindPopup(`<b>${p.name}</b>`);
             });
 
-            // 增加地圖重繪的邏輯 (解決 iframe 白底核心關鍵)
-            function forceRefreshMap() {
-                map.invalidateSize();
-            }
-
-            // 延遲執行，確保 iframe 佈局完全擴展
-            setTimeout(forceRefreshMap, 100);
-            setTimeout(forceRefreshMap, 500);
-            setTimeout(forceRefreshMap, 1000);
+            // 解決白底的最強解：強制觸發重繪
+            setTimeout(() => { map.invalidateSize(); }, 500);
         });
     </script>
 </body>
