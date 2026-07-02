@@ -8,84 +8,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body { height: 100vh; overflow: hidden; display: flex; flex-direction: column; font-family: "Microsoft JhengHei", sans-serif; }
-        
-        /* 頂部 Header */
-        .main-header {
-            background-color: #2c3e50;
-            color: white;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 15px;
-            flex-shrink: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1050; /* 比 Sidebar 高 */
-            position: relative;
-        }
-        
-        /* 標題樣式：過長時自動省略 */
-        .brand-title { 
-            font-weight: bold; 
-            font-size: 1.1rem; 
-            letter-spacing: 1px; 
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            max-width: 70vw; 
-        }
-        
-        /* 漢堡選單按鈕 (手機版顯示) */
-        .sidebar-toggle {
-            background: none; border: none; color: white;
-            font-size: 1.5rem; margin-right: 15px; cursor: pointer; display: none;
-        }
-
-        /* 下方主容器 */
+        .main-header { background-color: #2c3e50; color: white; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 1050; }
+        .brand-title { font-weight: bold; font-size: 1.1rem; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70vw; }
+        .sidebar-toggle { background: none; border: none; color: white; font-size: 1.5rem; margin-right: 15px; cursor: pointer; display: none; }
         .app-container { display: flex; flex-grow: 1; overflow: hidden; position: relative; }
-        
-        /* 左側導覽列 Sidebar */
-        .sidebar {
-            width: 260px; background-color: #343a40; color: #adb5bd;
-            display: flex; flex-direction: column; flex-shrink: 0;
-            transition: transform 0.3s ease-in-out; z-index: 1040; height: 100%;
-        }
-        
+        .sidebar { width: 260px; background-color: #343a40; color: #adb5bd; display: flex; flex-direction: column; flex-shrink: 0; transition: transform 0.3s ease-in-out; z-index: 1040; height: 100%; }
         .sidebar-menu { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
-        
-        .nav-category {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
-            color: #6c757d; padding: 15px 20px 5px 20px; font-weight: bold;
-        }
-
+        .nav-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #6c757d; padding: 15px 20px 5px 20px; font-weight: bold; }
         .nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
-        
-        .nav-link {
-            display: block; padding: 12px 20px; color: #d1d1d1;
-            text-decoration: none; transition: 0.2s; border-left: 4px solid transparent; cursor: pointer;
-        }
-        
+        .nav-link { display: block; padding: 12px 20px; color: #d1d1d1; text-decoration: none; transition: 0.2s; border-left: 4px solid transparent; cursor: pointer; }
         .nav-link:hover { background-color: #495057; color: white; }
-        
-        .nav-link.active {
-            background-color: #2c3e50; color: #0d6efd; border-left-color: #0d6efd; font-weight: bold;
-        }
-        
+        .nav-link.active { background-color: #2c3e50; color: #0d6efd; border-left-color: #0d6efd; font-weight: bold; }
         .nav-link i { width: 25px; text-align: center; margin-right: 10px; }
-
-        /* 右側內容區 */
         .content-wrapper { flex-grow: 1; background-color: #f8f9fa; position: relative; overflow: hidden; width: 100%; }
-        
-        /* iframe 設定 */
         #mainFrame { width: 100%; height: 100%; border: none; display: block; }
-
-        /* 手機版遮罩 (Overlay) */
-        .sidebar-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.5); z-index: 1030; display: none;
-        }
-
-        /* --- RWD 響應式設定 --- */
+        .sidebar-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1030; display: none; }
         @media (max-width: 768px) {
             .sidebar-toggle { display: block; }
             .sidebar { position: absolute; left: 0; top: 0; bottom: 0; transform: translateX(-100%); }
@@ -105,7 +42,6 @@
             <i class="fas fa-shield-alt fa-lg me-2 text-warning d-none d-sm-block"></i>
             <span class="brand-title" title="屏東縣非法棄置智慧圍籬系統">屏東縣非法棄置智慧圍籬系統</span>
         </div>
-        
         <div class="d-flex align-items-center">
             <div class="dropdown me-1">
                 <a href="#" class="text-white text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
@@ -144,7 +80,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" onclick="loadPage('video.html', this)">
-                        <i class="fas fa-video"></i> 影像調閱
+                        <i class="fas fa-video"></i> 即時影像
                     </a>
                 </li>
                 <div class="nav-category">設備與數據</div>
@@ -182,7 +118,7 @@
             </ul>
             <div class="p-3 text-center text-muted small mt-auto border-top border-secondary">
                 Ver 1.0.3 Mobile<br>
-                &copy; 2023 Taoyuan EPB
+                &copy; 2026 Pingtung EPB
             </div>
         </nav>
 
