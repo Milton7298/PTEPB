@@ -53,11 +53,17 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/leaflet.js"></script>
+   <script src="https://unpkg.com/leaflet@1.9.4/leaflet.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        // 使用 window.onload 確保 HTML 結構、CSS 樣式與 iframe 大小都穩定後才執行
+        window.addEventListener('load', () => {
+            // 初始化地圖容器
             const map = L.map('gisMap').setView([22.75, 120.55], 11);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+
+            // 載入 OpenStreetMap 圖資
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+                attribution: '© OpenStreetMap' 
+            }).addTo(map);
 
             const points = [
                 { name: "國道10號里港交流道(里港鄉)", coords: [22.7834, 120.4932], id: "LOCA_68000_2026_0001" },
@@ -71,10 +77,15 @@
                 L.marker(p.coords).addTo(map).bindPopup(`<b>${p.name}</b><br>ID: ${p.id}`);
             });
 
-            // 強制多次重繪，確保渲染成功
-            const forceResize = () => { map.invalidateSize(); };
-            setTimeout(forceResize, 500);
-            setTimeout(forceResize, 1500);
+            // 增加地圖重繪的邏輯 (解決 iframe 白底核心關鍵)
+            function forceRefreshMap() {
+                map.invalidateSize();
+            }
+
+            // 延遲執行，確保 iframe 佈局完全擴展
+            setTimeout(forceRefreshMap, 100);
+            setTimeout(forceRefreshMap, 500);
+            setTimeout(forceRefreshMap, 1000);
         });
     </script>
 </body>
